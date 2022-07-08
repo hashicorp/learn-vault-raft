@@ -362,6 +362,7 @@ listener "tcp" {
    tls_disable = true
 }
 
+ui = true
 disable_mlock = true
 EOF
 
@@ -397,6 +398,7 @@ seal "transit" {
    mount_path         = "transit/"
 }
 
+ui = true
 disable_mlock = true
 cluster_addr = "http://127.0.0.2:8201"
 EOF
@@ -433,6 +435,7 @@ seal "transit" {
    mount_path         = "transit/"
 }
 
+ui = true
 disable_mlock = true
 cluster_addr = "http://127.0.0.3:8201"
 EOF
@@ -469,6 +472,7 @@ seal "transit" {
    mount_path         = "transit/"
 }
 
+ui = true
 disable_mlock = true
 cluster_addr = "http://127.0.0.4:8201"
 EOF
