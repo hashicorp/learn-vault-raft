@@ -198,24 +198,25 @@ function create_config {
   mkdir -pm 0755 "$demo_home"/ha-raft_1
 
   tee "$demo_home"/config-vault_1.hcl 1> /dev/null <<EOF
-  ha_storage "raft" {
-    path    = "$demo_home/ha-raft_1/"
-    node_id = "vault_1"
-  }
+ha_storage "raft" {
+   path    = "$demo_home/ha-raft_1/"
+   node_id = "vault_1"
+}
 
-  storage "file" {
-    path = "$demo_home/vault-storage-file/"
-  }
+storage "file" {
+   path = "$demo_home/vault-storage-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8210"
-    cluster_address = "127.0.0.1:8211"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8210"
+   cluster_address = "127.0.0.1:8211"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8210"
-  cluster_addr = "http://127.0.0.1:8211"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8210"
+cluster_addr = "http://127.0.0.1:8211"
 EOF
 
   printf "\n%s" \
@@ -228,24 +229,25 @@ EOF
   mkdir -pm 0755 "$demo_home"/ha-raft_2
 
   tee "$demo_home"/config-vault_2.hcl 1> /dev/null <<EOF
-  ha_storage "raft" {
-    path    = "$demo_home/ha-raft_2/"
-    node_id = "vault_2"
-  }
+ha_storage "raft" {
+   path    = "$demo_home/ha-raft_2/"
+   node_id = "vault_2"
+}
 
-  storage "file" {
-    path = "$demo_home/vault-storage-file/"
-  }
+storage "file" {
+   path = "$demo_home/vault-storage-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8220"
-    cluster_address = "127.0.0.1:8221"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8220"
+   cluster_address = "127.0.0.1:8221"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8220"
-  cluster_addr = "http://127.0.0.1:8221"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8220"
+cluster_addr = "http://127.0.0.1:8221"
 EOF
 
   printf "\n%s" \
@@ -258,24 +260,25 @@ EOF
   mkdir -pm 0755 "$demo_home"/ha-raft_3
 
   tee "$demo_home"/config-vault_3.hcl 1> /dev/null <<EOF
-  ha_storage "raft" {
-    path    = "$demo_home/ha-raft_3/"
-    node_id = "vault_3"
-  }
+ha_storage "raft" {
+   path    = "$demo_home/ha-raft_3/"
+   node_id = "vault_3"
+}
 
-  storage "file" {
-    path = "$demo_home/vault-storage-file/"
-  }
+storage "file" {
+   path = "$demo_home/vault-storage-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8230"
-    cluster_address = "127.0.0.1:8231"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8230"
+   cluster_address = "127.0.0.1:8231"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8230"
-  cluster_addr = "http://127.0.0.1:8231"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8230"
+cluster_addr = "http://127.0.0.1:8231"
 EOF
   printf "\n"
 }

@@ -285,12 +285,14 @@ function create_config {
   rm -f config-vault_1.hcl
 
   tee "$demo_home"/config-vault_1.hcl 1> /dev/null <<EOF
-    storage "inmem" {}
-    listener "tcp" {
-      address = "127.0.0.1:8100"
-      tls_disable = true
-    }
-    disable_mlock = true
+storage "inmem" {}
+
+listener "tcp" {
+   address = "127.0.0.1:8100"
+   tls_disable = true
+}
+
+disable_mlock = true
 EOF
 
   printf "\n%s" \
@@ -303,27 +305,31 @@ EOF
   mkdir -pm 0755 "$demo_home"/raft-vault_2
 
   tee "$demo_home"/config-vault_2.hcl 1> /dev/null <<EOF
-  storage "raft" {
-    path    = "$demo_home/raft-vault_2/"
-    node_id = "vault_2"
-  }
-  listener "tcp" {
-    address = "127.0.0.1:8200"
-    cluster_address = "127.0.0.1:8201"
-    tls_disable = true
-  }
-  seal "transit" {
-    address            = "http://127.0.0.1:8100"
-    # token is read from VAULT_TOKEN env
-    # token              = ""
-    disable_renewal    = "false"
+storage "raft" {
+ path    = "$demo_home/raft-vault_2/"
+ node_id = "vault_2"
+}
 
-    // Key configuration
-    key_name           = "unseal_key"
-    mount_path         = "transit/"
-  }
-  disable_mlock = true
-  cluster_addr = "http://127.0.0.1:8201"
+listener "tcp" {
+ address = "127.0.0.1:8200"
+ cluster_address = "127.0.0.1:8201"
+ tls_disable = true
+}
+
+seal "transit" {
+ address            = "http://127.0.0.1:8100"
+ # token is read from VAULT_TOKEN env
+ # token              = ""
+ disable_renewal    = "false"
+
+ // Key configuration
+ key_name           = "unseal_key"
+ mount_path         = "transit/"
+}
+
+ui = true
+disable_mlock = true
+cluster_addr = "http://127.0.0.1:8201"
 EOF
 
   printf "\n%s" \
@@ -336,31 +342,35 @@ EOF
   mkdir -pm 0755 "$demo_home"/raft-vault_3
 
   tee "$demo_home"/config-vault_3.hcl 1> /dev/null <<EOF
-  storage "raft" {
-    path    = "$demo_home/raft-vault_3/"
-    node_id = "vault_3"
+storage "raft" {
+   path    = "$demo_home/raft-vault_3/"
+   node_id = "vault_3"
 
-    retry_join {
+   retry_join {
       leader_api_addr = "http://127.0.0.1:8200"
-    }
-  }
-  listener "tcp" {
-    address = "127.0.0.1:8300"
-    cluster_address = "127.0.0.1:8301"
-    tls_disable = true
-  }
-  seal "transit" {
-    address            = "http://127.0.0.1:8100"
-    # token is read from VAULT_TOKEN env
-    # token              = ""
-    disable_renewal    = "false"
+   }
+}
 
-    // Key configuration
-    key_name           = "unseal_key"
-    mount_path         = "transit/"
-  }
-  disable_mlock = true
-  cluster_addr = "http://127.0.0.1:8301"
+listener "tcp" {
+   address = "127.0.0.1:8300"
+   cluster_address = "127.0.0.1:8301"
+   tls_disable = true
+}
+
+seal "transit" {
+   address            = "http://127.0.0.1:8100"
+   # token is read from VAULT_TOKEN env
+   # token              = ""
+   disable_renewal    = "false"
+
+   // Key configuration
+   key_name           = "unseal_key"
+   mount_path         = "transit/"
+}
+
+ui = true
+disable_mlock = true
+cluster_addr = "http://127.0.0.1:8301"
 EOF
 
   printf "\n%s" \
@@ -373,31 +383,35 @@ EOF
   mkdir -pm 0755 "$demo_home"/raft-vault_4
 
   tee "$demo_home"/config-vault_4.hcl 1> /dev/null <<EOF
-  storage "raft" {
-    path    = "$demo_home/raft-vault_4/"
-    node_id = "vault_4"
+storage "raft" {
+   path    = "$demo_home/raft-vault_4/"
+   node_id = "vault_4"
 
-    retry_join {
+   retry_join {
       leader_api_addr = "http://127.0.0.1:8200"
-    }
-  }
-  listener "tcp" {
-    address = "127.0.0.1:8400"
-    cluster_address = "127.0.0.1:8401"
-    tls_disable = true
-  }
-  seal "transit" {
-    address            = "http://127.0.0.1:8100"
-    # token is read from VAULT_TOKEN env
-    # token              = ""
-    disable_renewal    = "false"
+   }
+}
 
-    // Key configuration
-    key_name           = "unseal_key"
-    mount_path         = "transit/"
-  }
-  disable_mlock = true
-  cluster_addr = "http://127.0.0.1:8401"
+listener "tcp" {
+   address = "127.0.0.1:8400"
+   cluster_address = "127.0.0.1:8401"
+   tls_disable = true
+}
+
+seal "transit" {
+   address            = "http://127.0.0.1:8100"
+   # token is read from VAULT_TOKEN env
+   # token              = ""
+   disable_renewal    = "false"
+
+   // Key configuration
+   key_name           = "unseal_key"
+   mount_path         = "transit/"
+}
+
+ui = true
+disable_mlock = true
+cluster_addr = "http://127.0.0.1:8401"
 EOF
 
 
@@ -419,11 +433,13 @@ storage "raft" {
     leader_api_addr = "http://127.0.0.1:8200"
   }
 }
+
 listener "tcp" {
   address = "127.0.0.1:8500"
   cluster_address = "127.0.0.1:8501"
   tls_disable = true
 }
+
 seal "transit" {
   address            = "http://127.0.0.1:8100"
   # token is read from VAULT_TOKEN env
@@ -434,6 +450,8 @@ seal "transit" {
   key_name           = "unseal_key"
   mount_path         = "transit/"
 }
+
+ui = true
 disable_mlock = true
 cluster_addr = "http://127.0.0.1:8501"
 EOF
@@ -456,11 +474,13 @@ storage "raft" {
     leader_api_addr = "http://127.0.0.1:8200"
   }
 }
+
 listener "tcp" {
   address = "127.0.0.1:8600"
   cluster_address = "127.0.0.1:8601"
   tls_disable = true
 }
+
 seal "transit" {
   address            = "http://127.0.0.1:8100"
   # token is read from VAULT_TOKEN env
@@ -471,6 +491,8 @@ seal "transit" {
   key_name           = "unseal_key"
   mount_path         = "transit/"
 }
+
+ui = true
 disable_mlock = true
 cluster_addr = "http://127.0.0.1:8601"
 EOF
@@ -494,11 +516,13 @@ storage "raft" {
     leader_api_addr = "http://127.0.0.1:8200"
   }
 }
+
 listener "tcp" {
   address = "127.0.0.1:8700"
   cluster_address = "127.0.0.1:8701"
   tls_disable = true
 }
+
 seal "transit" {
   address            = "http://127.0.0.1:8100"
   # token is read from VAULT_TOKEN env
@@ -509,6 +533,8 @@ seal "transit" {
   key_name           = "unseal_key"
   mount_path         = "transit/"
 }
+
+ui = true
 disable_mlock = true
 cluster_addr = "http://127.0.0.1:8701"
 EOF

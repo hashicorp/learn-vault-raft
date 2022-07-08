@@ -195,24 +195,25 @@ function update {
     ""
 
   tee "$demo_home"/config-vault_1.hcl 1> /dev/null <<EOF
-  ha_storage "raft" {
-    path    = "$demo_home/raft-vault_1/"
-    node_id = "vault_1"
-  }
+ha_storage "raft" {
+   path    = "$demo_home/raft-vault_1/"
+   node_id = "vault_1"
+}
 
-  storage "file" {
-  	path = "$demo_home/vault-raft-file/"
-  }
+storage "file" {
+	path = "$demo_home/vault-raft-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8210"
-    cluster_address = "127.0.0.1:8211"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8210"
+   cluster_address = "127.0.0.1:8211"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8210"
-  cluster_addr = "http://127.0.0.1:8211"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8210"
+cluster_addr = "http://127.0.0.1:8211"
 EOF
 
   local vault_config_file=$demo_home/config-$vault_node_name.hcl
@@ -265,19 +266,20 @@ function setup_vault_1 {
   rm -f config-vault_1.hcl
 
   tee "$demo_home"/config-vault_1.hcl 1> /dev/null <<EOF
-  storage "file" {
-  	path = "$demo_home/vault-raft-file/"
-  }
+storage "file" {
+	path = "$demo_home/vault-raft-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8210"
-    cluster_address = "127.0.0.1:8211"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8210"
+   cluster_address = "127.0.0.1:8211"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8210"
-  cluster_addr = "http://127.0.0.1:8211"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8210"
+cluster_addr = "http://127.0.0.1:8211"
 EOF
 
   local vault_node_name="vault_1"
@@ -337,24 +339,25 @@ function setup_vault_2 {
   mkdir -pm 0755 "$demo_home"/raft-vault_2
 
   tee "$demo_home"/config-vault_2.hcl 1> /dev/null <<EOF
-  ha_storage "raft" {
-    path    = "$demo_home/raft-vault_2/"
-    node_id = "vault_2"
-  }
+ha_storage "raft" {
+   path    = "$demo_home/raft-vault_2/"
+   node_id = "vault_2"
+}
 
-  storage "file" {
-    path = "$demo_home/vault-raft-file/"
-  }
+storage "file" {
+   path = "$demo_home/vault-raft-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8220"
-    cluster_address = "127.0.0.1:8221"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8220"
+   cluster_address = "127.0.0.1:8221"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8220"
-  cluster_addr = "http://127.0.0.1:8221"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8220"
+cluster_addr = "http://127.0.0.1:8221"
 EOF
 
   local vault_node_name="vault_2"
@@ -409,24 +412,25 @@ function setup_vault_3 {
   mkdir -pm 0755 "$demo_home"/raft-vault_3
 
   tee "$demo_home"/config-vault_3.hcl 1> /dev/null <<EOF
-  ha_storage "raft" {
-    path    = "$demo_home/raft-vault_3/"
-    node_id = "vault_3"
-  }
+ha_storage "raft" {
+   path    = "$demo_home/raft-vault_3/"
+   node_id = "vault_3"
+}
 
-  storage "file" {
-    path = "$demo_home/vault-raft-file/"
-  }
+storage "file" {
+   path = "$demo_home/vault-raft-file/"
+}
 
-  listener "tcp" {
-    address = "127.0.0.1:8230"
-    cluster_address = "127.0.0.1:8231"
-    tls_disable = true
-  }
+listener "tcp" {
+   address = "127.0.0.1:8230"
+   cluster_address = "127.0.0.1:8231"
+   tls_disable = true
+}
 
-  disable_mlock = true
-  api_addr = "http://127.0.0.1:8230"
-  cluster_addr = "http://127.0.0.1:8231"
+ui = true
+disable_mlock = true
+api_addr = "http://127.0.0.1:8230"
+cluster_addr = "http://127.0.0.1:8231"
 EOF
   printf "\n"
 
