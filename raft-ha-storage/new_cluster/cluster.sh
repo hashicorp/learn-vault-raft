@@ -41,17 +41,17 @@ function vault_to_network_address {
 
 # Create a helper function to address the second vault node
 function vault_1 {
-    (export VAULT_ADDR=http://127.0.0.1:8210 && vault "$@")
+    (export VAULT_LICENSE=$VAULT_LICENSE && export VAULT_ADDR=http://127.0.0.1:8210 && vault "$@")
 }
 
 # Create a helper function to address the third vault node
 function vault_2 {
-    (export VAULT_ADDR=http://127.0.0.1:8220 && vault "$@")
+    (export VAULT_LICENSE=$VAULT_LICENSE && export VAULT_ADDR=http://127.0.0.1:8220 && vault "$@")
 }
 
 # Create a helper function to address the fourth vault node
 function vault_3 {
-    (export VAULT_ADDR=http://127.0.0.1:8230 && vault "$@")
+    (export VAULT_LICENSE=$VAULT_LICENSE && export VAULT_ADDR=http://127.0.0.1:8230 && vault "$@")
 }
 
 function stop_vault {
