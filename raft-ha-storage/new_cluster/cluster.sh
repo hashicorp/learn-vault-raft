@@ -316,7 +316,7 @@ function setup_vault_1 {
 
   vault_1 operator unseal `cat $demo_home/unsealKey1`
 
-  sleep 10s
+  sleep 10
 
   vault_1 login `cat $demo_home/rootToken1`
 
@@ -324,15 +324,15 @@ function setup_vault_1 {
     "[vault_1] waiting to finish post-unseal setup (15 seconds)" \
     ""
 
-  sleep 5s
+  sleep 5
 
   printf "\n%s" \
     "[vault_1] logging in and enabling the KV secrets engine" \
     ""
-  sleep 2s # Added for human readability
+  sleep 2 # Added for human readability
 
   vault_1 secrets enable -path=kv kv-v2
-  sleep 2s
+  sleep 2
 
   printf "\n%s" \
     "[vault_1] storing secret 'kv/apikey' for testing" \
@@ -354,21 +354,21 @@ function setup_vault_2 {
 
   VAULT_API_ADDR=http://127.0.0.1:8220 vault server -log-level=trace -config "$vault_config_file" > "$vault_log_file" 2>&1 &
   while ! nc -w 1 localhost 8220 </dev/null; do sleep 1; done
-  sleep 2s
+  sleep 2
 
   printf "\n%s" \
     "[$vault_node_name] Unseal $vault_node_name" \
     ""
   vault_2 operator unseal `cat $demo_home/unsealKey1`
 
-  sleep 1s
+  sleep 1
 
   printf "\n%s" \
     "[$vault_node_name] Join the raft cluster" \
     ""
   vault_2 operator raft join
 
-  sleep 5s
+  sleep 5
 
   vault_2 login `cat $demo_home/rootToken1`
 
@@ -396,21 +396,21 @@ function setup_vault_3 {
 
   VAULT_API_ADDR=http://127.0.0.1:8230 vault server -log-level=trace -config "$vault_config_file" > "$vault_log_file" 2>&1 &
   while ! nc -w 1 localhost 8230 </dev/null; do sleep 1; done
-  sleep 2s
+  sleep 2
 
   printf "\n%s" \
     "[$vault_node_name] Unseal $vault_node_name" \
     ""
   vault_3 operator unseal `cat $demo_home/unsealKey1`
 
-  sleep 1s
+  sleep 1
 
   printf "\n%s" \
     "[$vault_node_name] Join the raft cluster" \
     ""
   vault_3 operator raft join
 
-  sleep 5s
+  sleep 5
 
   vault_3 login `cat $demo_home/rootToken1`
 
