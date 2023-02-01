@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 # shellcheck disable=SC2005,SC2030,SC2031,SC2174
 #
 # This script helps manage Vault running in a multi-node cluster
