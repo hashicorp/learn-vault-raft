@@ -155,7 +155,7 @@ function start {
       ;;
     *)
       printf "\n%s" \
-        "Usage: $script_name stop [all|vault_1|vault_2|vault_3|vault_4]" \
+        "Usage: $script_name start [all|vault_1|vault_2|vault_3|vault_4]" \
         ""
       ;;
     esac
