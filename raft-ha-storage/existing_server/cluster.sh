@@ -253,7 +253,10 @@ function setup_vault_1 {
 
   set -aex
   # Kill all previous server instances
-  ps aux | grep "vault server" | grep -v grep | awk '{print $2}' | xargs kill
+  previous=$(ps aux | grep "vault server" | grep -v grep | awk '{print $2}')
+  if [ -n "$previous" ]; then
+     echo "$previous" | xargs kill
+  fi
 
   rm -rf "$demo_home"/vault-raft-file
   mkdir -pm 0755 "$demo_home"/vault-raft-file
